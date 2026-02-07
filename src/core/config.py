@@ -25,7 +25,9 @@ class Settings:
         self.BETTER_AUTH_SECRET: str = self._get_required_env("BETTER_AUTH_SECRET")
 
         # CORS Configuration
-        cors_origins_str = os.getenv("CORS_ORIGINS", "http://localhost:3000")
+        # Default includes localhost for development and common Vercel/production URLs
+        default_cors = "http://localhost:3000,http://localhost:5173,https://hackathon-2-iota-three.vercel.app"
+        cors_origins_str = os.getenv("CORS_ORIGINS", default_cors)
         self.CORS_ORIGINS: List[str] = [
             origin.strip() for origin in cors_origins_str.split(",") if origin.strip()
         ]
