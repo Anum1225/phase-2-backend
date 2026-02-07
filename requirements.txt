@@ -1,0 +1,26 @@
+# FastAPI Backend Requirements
+# Phase II: Multi-User Todo Application
+
+# Core Framework
+fastapi>=0.100.0
+uvicorn[standard]>=0.24.0
+
+# Database & ORM
+sqlmodel>=0.0.14
+psycopg2-binary>=2.9.0
+
+# Authentication & Security
+PyJWT>=2.8.0
+bcrypt>=4.1.0
+
+# Configuration
+python-dotenv>=1.0.0
+
+# Utilities
+pydantic>=2.0.0
+python-multipart>=0.0.6
+
+# Development & Testing (optional)
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+httpx>=0.25.0
