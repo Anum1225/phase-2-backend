@@ -29,10 +29,22 @@ app = FastAPI(
 # CORS MIDDLEWARE
 # ============================================================================
 
+# Explicit CORS origins including Vercel frontend and development environments
+# These are merged with any environment-specific origins from settings
+cors_allowed_origins = [
+    "http://localhost:3000",  # Next.js development
+    "http://localhost:5173",  # Vite development
+    "https://hackathon-2-iota-three.vercel.app",  # Vercel production frontend
+    *settings.CORS_ORIGINS,  # Additional origins from environment variables
+]
+
+# Remove duplicates while preserving order
+cors_allowed_origins = list(dict.fromkeys(cors_allowed_origins))
+
 # Configure CORS to allow frontend requests
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,  # Frontend domains from environment
+    allow_origins=cors_allowed_origins,  # Frontend domains
     allow_credentials=True,  # Allow cookies and Authorization headers
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Allowed HTTP methods
     allow_headers=["*"],  # Allow all headers (including Authorization)
